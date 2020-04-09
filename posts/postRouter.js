@@ -1,9 +1,20 @@
-const express = require('express');
+const express = require('express'); //imports express
 
-const router = express.Router();
+const router = express.Router(); //adds router to express
 
+const Posts = require('./postDb'); //imports the posts database
+
+//gets list of posts
 router.get('/', (req, res) => {
-  // do your magic!
+  // /api/posts
+  Posts.get(req.query)
+  .then(posts => {
+    res.status(200).json(posts)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({message: 'failed to get posts'})
+  })
 });
 
 router.get('/:id', (req, res) => {
