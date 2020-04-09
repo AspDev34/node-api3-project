@@ -17,16 +17,42 @@ router.get('/', (req, res) => {
   })
 });
 
+// gets a specific post
 router.get('/:id', (req, res) => {
-  // do your magic!
+  // /api/posts
+  Posts.getById(req.params.id)
+  .then(post => {
+    res.status(200).json(post)
+  })
+  .catch(err => {
+    res.status(500).json({message: `${err} error retrieving post`})
+  })
 });
 
+// deletes a specific post
 router.delete('/:id', (req, res) => {
-  // do your magic!
+  // /api/posts
+  Posts.remove(req.params.id)
+  .then(post => {
+    res.status(200).json(post)
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({errorMessage: 'failed to delete'})
+  })
 });
 
+//modifies a specific post
 router.put('/:id', (req, res) => {
-  // do your magic!
+  // /api/posts
+  Posts.update(req.params.id, req.body)
+  .then(post => {
+    res.status(200).json(post)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({message: 'failed to update post'})
+  })
 });
 
 // custom middleware
