@@ -33,10 +33,9 @@ router.post('/:id/posts', validateUserId, (req, res) => {
 
 //gets list of users
 router.get('/', (req, res) => {
-  Users.get(req.query)
+  Users.get()
   .then(users => {
-    console.log(users)
-    res.status(200).json({message: 'error retrieving users'})
+    res.status(200).json(users)
   })
   .catch(err => {
     res.status(500).json({message: `error retrieving users: ${err}`})
