@@ -7,7 +7,7 @@ const Posts = require('./postDb'); //imports the posts database
 //gets list of posts
 router.get('/', (req, res) => {
   // /api/posts
-  Posts.get(req.query)
+  Posts.get()
   .then(posts => {
     res.status(200).json(posts)
   })
