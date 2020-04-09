@@ -44,11 +44,13 @@ router.get('/', (req, res) => {
 
 //gets a specific user
 router.get('/:id', validateUserId, (req, res) => {
-  Users.getUserPosts(req.user.id)
-  .then(posts => res.status(200).json(posts))
-  .catch(err => {
-    res.status(500).json({message: `error retrieving user: ${err}`})
-  })
+  // Users.getUserPosts(req.user.id)
+  // .then(posts => res.status(200).json(posts))
+  // .catch(err => {
+  //   res.status(500).json({message: `error retrieving user: ${err}`})
+  // })
+
+  res.status(200).json(req.user)
 });
 
 //get a user's posts
@@ -121,7 +123,9 @@ function validatePost(req, res, next) {
     res.status(400).json({errorMessage: 'missing post data'})
   }
   else {
+    
     next();
+    
   }
 }
 
